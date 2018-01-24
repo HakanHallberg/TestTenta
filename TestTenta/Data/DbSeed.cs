@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,13 +9,20 @@ namespace TestTenta.Data
 {
     public class DbSeed
     {
-        public static void Seed(ApplicationDbContext context)
+        public static void Seed(ApplicationDbContext context, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             var Cola = new Product { Name = "Coca Cola", UnitPrice = 10, ReleaseDate = DateTime.ParseExact("2005-09-01", "yyyy-MM-dd", null)};
             context.Product.Add(Cola);
 
             context.SaveChanges();
 
+            var user = new ApplicationUser { UserName = "admin@test.com", Email= "admin@test.com" };
+            var result = userManager.CreateAsync(user, "pA$$w0rd").Result;
+            var admin = new IdentityRole { Name = "admin" };
+            var role = roleManager.CreateAsync(admin).Result;
+            userManager.AddToRoleAsync(user, "admin");
         }
+
+        
     }
 }

@@ -16,6 +16,7 @@ namespace TestTenta.Models
         public int UnitPrice { get; set; }
         [DataType(DataType.Date)]
         public DateTime ReleaseDate { get; set; }
+        []
         public bool IsDeleted { get; set; }
     }
 }

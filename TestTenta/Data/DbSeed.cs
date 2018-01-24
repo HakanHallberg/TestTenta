@@ -16,11 +16,14 @@ namespace TestTenta.Data
 
             context.SaveChanges();
 
-            var user = new ApplicationUser { UserName = "admin@test.com", Email= "admin@test.com" };
+            var user = new ApplicationUser { UserName = "admin@test.com"};
             var result = userManager.CreateAsync(user, "pA$$w0rd").Result;
             var admin = new IdentityRole { Name = "admin" };
             var role = roleManager.CreateAsync(admin).Result;
             userManager.AddToRoleAsync(user, "admin");
+
+            user  = new ApplicationUser { UserName = "student@test.com"};
+            result = userManager.CreateAsync(user, "pA$$w0rd").Result;
         }
 
         

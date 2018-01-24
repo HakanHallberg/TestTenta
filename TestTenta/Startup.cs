@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using TestTenta.Data;
 using TestTenta.Models;
 using TestTenta.Services;
+using TestTenta.Interfaces;
 
 namespace TestTenta
 {
@@ -35,6 +36,10 @@ namespace TestTenta
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+
+            ITimeProvider myFakeTimeProvider = new FakeTimeProvider();
+            myFakeTimeProvider.Now = new DateTime(2018, 2, 1);
+            services.AddSingleton<ITimeProvider>(new FakeTimeProvider());
 
             services.AddMvc();
         }

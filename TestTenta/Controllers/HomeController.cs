@@ -4,12 +4,18 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using TestTenta.Interfaces;
 using TestTenta.Models;
 
 namespace TestTenta.Controllers
 {
     public class HomeController : Controller
     {
+        private ITimeProvider _timeProvider;
+        public HomeController(ITimeProvider timeProvider)
+        {
+            _timeProvider = timeProvider;
+        }
         public IActionResult Index()
         {
             return View();

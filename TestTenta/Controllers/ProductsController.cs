@@ -8,17 +8,20 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using TestTenta.Data;
+using TestTenta.Interfaces;
 using TestTenta.Models;
 
 namespace TestTenta.Controllers
 {
     public class ProductsController : Controller
     {
+        private ITimeProvider _timeProvider;
         private readonly ApplicationDbContext _context;
         private readonly ILogger<ProductsController> _logger;
 
-        public ProductsController(ApplicationDbContext context, ILogger<ProductsController>logger)
+        public ProductsController(ApplicationDbContext context, ILogger<ProductsController>logger, ITimeProvider timeProvider)
         {
+            _timeProvider = timeProvider;
             _logger = logger;
             _context = context;
         }
@@ -26,7 +29,18 @@ namespace TestTenta.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Product.OrderBy(p => p.Name).ToListAsync());
+            return View(await _context.Product.OrderBy(p => p.Name).ToListAsync());       
+        }
+
+        public IActionResult IncreaseMonth()
+        {
+            _timeProvider.Now = _timeProvider.Now.AddMonths(1);
+            return RedirectToAction("Index");
+        }
+        public IActionResult DecreaseMonth()
+        {
+            _timeProvider.Now = _timeProvider.Now.AddMonths(-1);
+            return RedirectToAction("Index");
         }
 
         // GET: Products/Details/5

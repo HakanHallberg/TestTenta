@@ -12,11 +12,11 @@ namespace TestTenta.Data
         public static void Seed(ApplicationDbContext context, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
 
-            var Bread = new Product { Name = "Loaf", UnitPrice = 7, ReleaseDate = DateTime.ParseExact("2015-10-01", "yyyy-MM-dd", null) };
+            var Bread = new Product { Name = "Lo@af", UnitPrice = 7, ReleaseDate = DateTime.ParseExact("2015-10-01", "yyyy-MM-dd", null) };
             context.Product.Add(Bread);
             var Milk = new Product { Name = "Milk", UnitPrice = 2, ReleaseDate = DateTime.ParseExact("2018-01-01", "yyyy-MM-dd", null) };
             context.Product.Add(Milk);
-            var Cola = new Product { Name = "Coca Cola", UnitPrice = 10, ReleaseDate = DateTime.ParseExact("2005-09-01", "yyyy-MM-dd", null) };
+            var Cola = new Product { Name = "Coca?Cola", UnitPrice = 10, ReleaseDate = DateTime.ParseExact("2005-09-01", "yyyy-MM-dd", null) };
             context.Product.Add(Cola);
 
             context.SaveChanges();

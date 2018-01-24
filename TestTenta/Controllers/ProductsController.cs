@@ -22,7 +22,7 @@ namespace TestTenta.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Product.ToListAsync());
+            return View(await _context.Product.OrderBy(p => p.Name).ToListAsync());
         }
 
         // GET: Products/Details/5

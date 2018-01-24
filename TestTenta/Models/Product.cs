@@ -11,8 +11,10 @@ namespace TestTenta.Models
         public int ProductId { get; set; }
         [StringLength(60, MinimumLength = 3)]
         public string Name { get; set; }
+        [DataType(DataType.Currency)]
         [Range(1, 1000000)]
         public int UnitPrice { get; set; }
+        [DataType(DataType.Date)]
         public DateTime ReleaseDate { get; set; }
         public bool IsDeleted { get; set; }
     }
